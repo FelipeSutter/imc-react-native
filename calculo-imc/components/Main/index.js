@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, Button, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  Button,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
 
 const Main = () => {
   const [peso, setPeso] = useState("");
@@ -29,21 +36,32 @@ const Main = () => {
 
   return (
     <View style={styles.container}>
-      <TextInput
-        value={peso}
-        placeholder="Digite seu peso"
-        onChangeText={(text) => setPeso(text)}
-        keyboardType="numeric"
-        style={styles.input}
-      />
-      <TextInput
-        value={altura}
-        placeholder="Digite sua altura"
-        onChangeText={(text) => setAltura(text)}
-        keyboardType="numeric"
-        style={styles.input}
-      />
-      <Button title="Clique em mim" onPress={calcularImc} />
+      <View>
+        <View style={styles.containerInput}>
+          <Text> Peso</Text>
+          <TextInput
+            value={peso}
+            placeholder="Digite seu peso"
+            onChangeText={(text) => setPeso(text)}
+            keyboardType="numeric"
+            style={styles.input}
+          />
+        </View>
+        <View style={styles.containerInput}>
+          <Text> Altura</Text>
+
+          <TextInput
+            value={altura}
+            placeholder="Digite sua altura"
+            onChangeText={(text) => setAltura(text)}
+            keyboardType="numeric"
+            style={styles.input}
+          />
+        </View>
+      </View>
+      <TouchableOpacity style={styles.btn} onPress={calcularImc}>
+        <Text style={{ color: "white" }}>Clique em mim</Text>
+      </TouchableOpacity>
 
       {imc !== undefined && <Text>{imc}</Text>}
       {diagnostico !== "" && <Text>{diagnostico}</Text>}
@@ -52,16 +70,26 @@ const Main = () => {
 };
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
     marginTop: 50,
+    backgroundColor: "#6184a6",
   },
+  containerInput: {},
   input: {
-    borderColor: "black",
+    borderColor: "white",
     borderRadius: 10,
     borderWidth: 1,
-    width: 100,
+    width: 200,
     marginTop: 10,
+    marginBottom: 10,
+    padding: 10,
+    backgroundColor: "lightgray",
+  },
+  btn: {
+    borderRadius: 10,
+    backgroundColor: "#213053",
     padding: 10,
   },
 });
