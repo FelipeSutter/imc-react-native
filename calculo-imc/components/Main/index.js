@@ -7,6 +7,7 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
+import Header from "../Header";
 
 const Main = () => {
   const [peso, setPeso] = useState("");
@@ -39,9 +40,7 @@ const Main = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={{ textAlign: "center", fontSize: 30 }}>
-        Cálculo IMC - G4
-      </Text>
+      <Header />
       <View style={styles.containerInterno}>
         <View>
           <View style={styles.containerInput}>
