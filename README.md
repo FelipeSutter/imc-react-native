@@ -1,1 +1,1 @@
-# imc-react-native
+<h1 align=center>Cálculo IMC</h1>
