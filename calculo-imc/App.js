@@ -4,7 +4,7 @@ import Main from "./components/Main";
 
 export default function App() {
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <Main />
     </View>
   );
