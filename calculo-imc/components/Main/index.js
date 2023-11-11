@@ -13,6 +13,7 @@ const Main = () => {
   const [altura, setAltura] = useState("");
   const [imc, setImc] = useState(null);
   const [diagnostico, setDiagnostico] = useState("");
+  const [botao, setBotao] = useState("Consulta");
 
   const calcularImc = () => {
     if (peso === "" || altura === "") {
@@ -21,6 +22,8 @@ const Main = () => {
       const calculoImc =
         parseFloat(peso) / (parseFloat(altura) * parseFloat(altura));
       setImc(calculoImc.toFixed(2));
+
+      setBotao("Novo Cálculo");
 
       if (calculoImc < 18.5) {
         setDiagnostico(`Voce está abaixo do peso.`);
@@ -36,47 +39,64 @@ const Main = () => {
 
   return (
     <View style={styles.container}>
-      <View>
-        <View style={styles.containerInput}>
-          <Text> Peso</Text>
-          <TextInput
-            value={peso}
-            placeholder="Digite seu peso"
-            onChangeText={(text) => setPeso(text)}
-            keyboardType="numeric"
-            style={styles.input}
-          />
-        </View>
-        <View style={styles.containerInput}>
-          <Text> Altura</Text>
+      <Text style={{ textAlign: "center", fontSize: 30 }}>
+        Cálculo IMC - G4
+      </Text>
+      <View style={styles.containerInterno}>
+        <View>
+          <View style={styles.containerInput}>
+            <Text style={styles.inputText}> Peso</Text>
+            <TextInput
+              value={peso}
+              placeholder="Digite seu peso"
+              onChangeText={(text) => setPeso(text)}
+              keyboardType="numeric"
+              style={styles.input}
+            />
+          </View>
+          <View style={styles.containerInput}>
+            <Text style={styles.inputText}> Altura</Text>
 
-          <TextInput
-            value={altura}
-            placeholder="Digite sua altura"
-            onChangeText={(text) => setAltura(text)}
-            keyboardType="numeric"
-            style={styles.input}
-          />
+            <TextInput
+              value={altura}
+              placeholder="Digite sua altura"
+              onChangeText={(text) => setAltura(text)}
+              keyboardType="numeric"
+              style={styles.input}
+            />
+          </View>
         </View>
+        <TouchableOpacity style={styles.btn} onPress={calcularImc}>
+          <Text style={{ color: "white", textAlign: "center" }}>{botao}</Text>
+        </TouchableOpacity>
+
+        {imc !== undefined && (
+          <Text style={{ fontSize: 30, marginTop: 10 }}>{imc}</Text>
+        )}
+        {diagnostico !== "" && (
+          <Text style={{ fontSize: 20, marginTop: 10 }}>{diagnostico}</Text>
+        )}
       </View>
-      <TouchableOpacity style={styles.btn} onPress={calcularImc}>
-        <Text style={{ color: "white" }}>Clique em mim</Text>
-      </TouchableOpacity>
-
-      {imc !== undefined && <Text>{imc}</Text>}
-      {diagnostico !== "" && <Text>{diagnostico}</Text>}
     </View>
   );
 };
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#d1f3f7",
+    paddingTop: 70,
+  },
+
+  containerInterno: {
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
     marginTop: 50,
     backgroundColor: "#6184a6",
+    borderTopStartRadius: 40,
+    borderTopEndRadius: 40,
   },
-  containerInput: {},
+
   input: {
     borderColor: "white",
     borderRadius: 10,
@@ -87,10 +107,16 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: "lightgray",
   },
+
+  inputText: {
+    fontSize: 20,
+  },
+
   btn: {
     borderRadius: 10,
     backgroundColor: "#213053",
     padding: 10,
+    width: 150,
   },
 });
 
